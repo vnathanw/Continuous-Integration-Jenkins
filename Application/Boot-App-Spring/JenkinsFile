@@ -39,7 +39,7 @@ pipeline {
         script {
             sh 'cd Application/Boot-App-Spring && docker build -t ${DOCKER_IMAGE} .'
             def dockerImage = docker.image("${DOCKER_IMAGE}")
-            docker.withRegistry('https://hub.docker.com/repository/docker/vnathanw/image-push/general', "docker-cred") {
+            docker.withRegistry('https://hub.docker.com/repository/docker/vnathanw/image-push/general', "dockerhub") {
                 dockerImage.push()
             }
         }
