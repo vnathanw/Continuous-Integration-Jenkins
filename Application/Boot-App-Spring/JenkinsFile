@@ -54,7 +54,7 @@ pipeline {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
                     git config user.email "vnathanw@gmail.com"
-                    git config user.name "Viswanathan P"
+                    git config user.name "vnathanw"
                     BUILD_NUMBER=${BUILD_NUMBER}
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" Application-Manifests/deployment.yml
                     git add Application-Manifests/deployment.yml
