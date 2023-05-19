@@ -24,7 +24,7 @@ pipeline {
       environment {
         DOCKER_IMAGE = "vnathanw/ultimate-cicd:${BUILD_NUMBER}"
         DOCKERFILE_LOCATION = "Application/Boot-App-Spring/Dockerfile"
-        REGISTRY_CREDENTIALS = credentials('docker-cred')
+        REGISTRY_CREDENTIALS = credentials('dockerhub')
       }
       steps {
         script {
