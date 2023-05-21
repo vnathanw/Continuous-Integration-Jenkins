@@ -24,9 +24,13 @@ pipeline {
           sh 'sed -i "s|image: vnathanw/image-push:.*$|image: vnathanw/image-push:${tagName}|" deployment.yaml'
           
           // Commit and push the updated deployment.yaml file
-          sh 'git add deployment.yaml'
-          sh 'git commit -m "Update deployment.yaml with image tag ${tagName}"'
-          sh 'git push origin master'
+          withCredentials([usernamePassword(credentialsId: 'github', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+            sh 'git config user.name "Jenkins"'
+            sh 'git config user.email "jenkins@example.com"'
+            sh "git add deployment.yaml"
+            sh 'git commit -m "Update deployment.yaml with image tag ${tagName}"'
+            sh 'git push origin master'
+          }
         }
       }
     }
