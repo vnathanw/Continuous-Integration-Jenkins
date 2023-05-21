@@ -19,6 +19,14 @@ pipeline {
             def dockerImage = docker.build("vnathanw/image-push:${tagName}")
             dockerImage.push()
           }
+          
+          // Update the deployment.yaml file with the new image tag
+          sh 'sed -i "s|image: vnathanw/image-push:.*$|image: vnathanw/image-push:${tagName}|" deployment.yaml'
+          
+          // Commit and push the updated deployment.yaml file
+          sh 'git add deployment.yaml'
+          sh 'git commit -m "Update deployment.yaml with image tag ${tagName}"'
+          sh 'git push origin master'
         }
       }
     }
