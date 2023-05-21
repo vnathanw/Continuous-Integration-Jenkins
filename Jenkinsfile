@@ -5,7 +5,7 @@ pipeline {
     stage('Checkout') {
       steps {
         // Checkout the code from GitHub
-           git(url: 'https://github.com/your-username/your-repo.git', clean: true)
+        git 'https://github.com/vnathanw/Continuous-Deployment-ArgoCD.git'
       }
     }
     
