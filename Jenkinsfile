@@ -15,7 +15,7 @@ pipeline {
                               def dockerImageTag = "${env.BUILD_NUMBER}" // Set a unique tag for the image, such as the build number
           
           docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-            docker.build("vnathanw/image-push:${dockerImageTag})
+            docker.build("vnathanw/image-push:${dockerImageTag}", "--build-arg HTML_FILE=index.html .")
             dockerImage("vnathanw/image-push:${dockerImageTag}).push()
           }
           
